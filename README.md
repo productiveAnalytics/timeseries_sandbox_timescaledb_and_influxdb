@@ -65,4 +65,24 @@ On psql prompt, list tables: ```\dt```
 7. Confirm the tables get loaded using 
 ```SELECT count(*) from <table-name>```
 
-## Run InfluxDB docker-compose
+## Run InfluxDB docker
+```
+docker run -d \
+ --name=influxdb \
+ --hostname=influxdb \
+ --ulimit nofile=32768:32768 \
+ -p 8086:8086 \
+ -v ~/Dev/docker_volumes/influxdb_v2/data:/var/lib/influxdb2 \
+ -v ~/Dev/docker_volumes/influxdb_v2/config:/etc/influxdb2 \
+ -v /etc/localtime:/etc/localtime:ro \
+ -e TZ=America/New_York \
+ -e DOCKER_INFLUXDB_INIT_MODE=setup \
+ -e DOCKER_INFLUXDB_INIT_USERNAME=db_admin \
+ -e DOCKER_INFLUXDB_INIT_PASSWORD=db_password \
+ -e DOCKER_INFLUXDB_INIT_ORG=ProductiveAnalytics \
+ -e DOCKER_INFLUXDB_INIT_BUCKET=my_bucket \
+ --restart unless-stopped \
+ influxdb:latest
+```
+
+Using local DB credentials, open http://localhost:8086 
