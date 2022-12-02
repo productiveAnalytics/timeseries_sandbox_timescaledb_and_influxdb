@@ -85,7 +85,12 @@ docker run -d \
  influxdb:latest
 ```
 
-Using local DB credentials, open http://localhost:8086 
+Confirm InfluxDB (v2) is running in docker:
+```
+docker exec influxdb ping
+docker exec influxdb influx config
+```
+Using local DB credentials, open the InfluxDB portal from the configured host:port e.g. http://localhost:8086 
 
 For programmatic access using bucket token, use:
 ```docker exec influxdb influx auth list | awk -v username=db_admin '$5 ~ username {print $4 " "}'```
