@@ -86,3 +86,6 @@ docker run -d \
 ```
 
 Using local DB credentials, open http://localhost:8086 
+
+For programmatic access using bucket token, use:
+```docker exec influxdb influx auth list | awk -v username=db_admin '$5 ~ username {print $4 " "}'```
