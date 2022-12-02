@@ -90,7 +90,8 @@ Confirm InfluxDB (v2) is running in docker:
 docker exec influxdb ping
 docker exec influxdb influx config
 ```
-Using local DB credentials, open the InfluxDB portal from the configured host:port e.g. http://localhost:8086 
-
-For programmatic access using bucket token, use:
+Multiple ways to connect to InfluxDB:
+1. Interactive shell: ```docker exec -it influxdb influx v1 shell```
+2. Using local DB credentials, open the InfluxDB Data Explorer portal from the configured host:port e.g. http://localhost:8086 
+3. For programmatic access using bucket token, obtain token:
 ```docker exec influxdb influx auth list | awk -v username=db_admin '$5 ~ username {print $4 " "}'```
